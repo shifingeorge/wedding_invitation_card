@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface MehrabFrameProps {
@@ -18,7 +17,7 @@ export const MehrabFrame: React.FC<MehrabFrameProps> = ({ children, variant = 'p
         className={`relative w-full h-full min-h-[550px] md:min-h-[600px] border-[4px] md:border-[6px] border-[#D4AF37] overflow-hidden bg-[#FFF8E7] shadow-[0_20px_60px_rgba(0,0,0,0.3)] transition-transform duration-700`}
         style={{
           clipPath: 'polygon(50% 0%, 100% 10%, 100% 100%, 0% 100%, 0% 10%)',
-          borderRadius: '0 0 20px md:20px 30px'
+          borderRadius: '0 0 20px 30px'
         }}
       >
         {/* Layered Inner Borders for Depth */}

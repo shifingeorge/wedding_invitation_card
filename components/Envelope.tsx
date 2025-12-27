@@ -1,33 +1,46 @@
-
-import React from 'react';
+import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { BISMILLAH, BRIDE_NAME, GROOM_NAME } from '../constants';
 
 interface EnvelopeProps {
-  onOpen: () => void;
+  onOpen?: () => void;
 }
 
 export const Envelope: React.FC<EnvelopeProps> = ({ onOpen }) => {
+  // compute viewport safely (fallbacks for SSR)
+  const vw = typeof window !== 'undefined' ? window.innerWidth : 1024;
+  const vh = typeof window !== 'undefined' ? window.innerHeight : 768;
+
+  const particles = useMemo(
+    () =>
+      Array.from({ length: 20 }).map(() => ({
+        x: Math.random() * vw,
+        y: Math.random() * vh,
+        duration: Math.random() * 5 + 3,
+        delay: Math.random() * 2,
+      })),
+    [vw, vh]
+  );
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#1a0505] overflow-hidden p-4">
       {/* Floating particles background */}
       <div className="absolute inset-0 pointer-events-none">
-        {[...Array(20)].map((_, i) => (
+        {particles.map((p, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-[#D4AF37] rounded-full opacity-30"
-            initial={{ 
-              x: Math.random() * window.innerWidth, 
-              y: Math.random() * window.innerHeight 
+            style={{ left: p.x, top: p.y }}
+            initial={{ y: 0, opacity: 0.3 }}
+            animate={{
+              y: [-10, -100, -200],
+              opacity: [0.3, 0.6, 0],
             }}
-            animate={{ 
-              y: [null, -100, -200],
-              opacity: [0.3, 0.6, 0]
-            }}
-            transition={{ 
-              duration: Math.random() * 5 + 3, 
+            transition={{
+              duration: p.duration,
               repeat: Infinity,
-              ease: "linear"
+              ease: 'linear',
+              delay: p.delay,
             }}
           />
         ))}
@@ -36,9 +49,9 @@ export const Envelope: React.FC<EnvelopeProps> = ({ onOpen }) => {
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1, ease: "easeOut" }}
+        transition={{ duration: 1, ease: 'easeOut' }}
         className="relative cursor-pointer group w-full max-w-[450px]"
-        onClick={onOpen}
+        onClick={() => onOpen?.()}
       >
         {/* Envelope Body */}
         <div className="relative w-full aspect-[4/3] bg-[#8B1538] rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.6)] border-4 border-[#D4AF37] overflow-hidden flex flex-col items-center justify-center px-6">
