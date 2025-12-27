@@ -7,72 +7,81 @@ interface EventCardProps {
   index: number;
 }
 
-const FloralCorner = ({ className = "" }: { className?: string }) => (
-  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className={`${className} opacity-30`}>
-    <path d="M0 40V10C0 4.47715 4.47715 0 10 0H40" stroke="#D4AF37" strokeWidth="1" />
-    <circle cx="5" cy="5" r="2" fill="#D4AF37" />
-    <path d="M15 5C15 5 12 12 5 15C12 18 15 25 15 25C15 25 18 18 25 15C18 12 15 5 15 5Z" fill="#D4AF37" fillOpacity="0.2" />
-  </svg>
-);
-
 export const EventCard: React.FC<EventCardProps> = ({ event, index }) => {
+  // Extract Day and Month/Year from date string roughly for the badge
+  const dateParts = event.date.split(','); // "Friday", " February 6", " 2026"
+  const dayName = dateParts[0];
+  const dateNum = dateParts[1]?.trim().split(' ')[1]; // "6"
+  const monthName = dateParts[1]?.trim().split(' ')[0].substring(0, 3).toUpperCase(); // "FEB"
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.2 }}
-      className="relative w-full max-w-lg mx-auto mb-10 md:mb-16 px-2"
+      transition={{ delay: index * 0.2, duration: 0.8 }}
+      className="relative w-full max-w-4xl mx-auto mb-16 px-4"
     >
-      <div
-        className="bg-white/95 p-6 md:p-10 rounded-3xl border border-[#D4AF37]/40 shadow-xl text-center relative overflow-hidden group hover:shadow-2xl transition-all duration-500"
+      <motion.div
+        whileHover={{ y: -5 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        className="group relative bg-white rounded-xl shadow-xl overflow-hidden border border-[#D4AF37]/30"
       >
-        {/* Floral Corners */}
-        <FloralCorner className="absolute top-2 left-2" />
-        <FloralCorner className="absolute top-2 right-2 rotate-90" />
-        <FloralCorner className="absolute bottom-2 left-2 -rotate-90" />
-        <FloralCorner className="absolute bottom-2 right-2 rotate-180" />
+        {/* Decorative Background Pattern */}
+        <div className="absolute inset-0 opacity-[0.05] pointer-events-none radial-gradient-gold"></div>
+        <div className="absolute top-0 left-0 w-full h-1 bg-[#8B1538]"></div>
 
-        {/* Decoration Overlay */}
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent"></div>
-
-        <div className="flex flex-col items-center">
-          <div className="relative mb-6">
-            <div className="absolute inset-0 bg-[#D4AF37]/10 rounded-full scale-150 blur-md group-hover:bg-[#D4AF37]/20 transition-colors"></div>
-            <div className="text-4xl md:text-5xl relative z-10 transition-transform duration-500 group-hover:scale-110">
-              {event.icon}
+        <div className="flex flex-col md:flex-row">
+          {/* Date Column - Left */}
+          <div className="md:w-1/4 bg-[#8B1538] text-[#FFF8E7] p-6 flex flex-col items-center justify-center relative overflow-hidden">
+            <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')]"></div>
+            <p className="font-cinzel text-lg tracking-widest mb-2 opacity-80">{dayName}</p>
+            <p className="font-cinzel text-6xl font-black leading-none mb-2">{dateNum}</p>
+            <p className="font-cinzel text-2xl tracking-[0.3em] font-bold">{monthName}</p>
+            <div className="mt-4 w-12 h-12 rounded-full border border-[#D4AF37]/50 flex items-center justify-center">
+              <span className="text-2xl pt-1">{event.icon}</span>
             </div>
           </div>
 
-          <h3 className="font-cinzel text-xl md:text-3xl mb-2 text-[#8B1538] leading-tight tracking-tight uppercase">{event.title}</h3>
+          {/* Content Column - Right */}
+          <div className="md:w-3/4 p-8 relative">
+            {/* Golden Corner Lines */}
+            <div className="absolute top-4 right-4 w-16 h-16 border-t border-r border-[#D4AF37] opacity-40"></div>
+            <div className="absolute bottom-4 left-4 w-16 h-16 border-b border-l border-[#D4AF37] opacity-40"></div>
 
-          <div className="flex items-center gap-3 mb-1">
-            <div className="h-[1px] w-4 bg-[#D4AF37]/50"></div>
-            <p className="font-cormorant font-bold text-[#D4AF37] text-lg md:text-xl uppercase tracking-widest">{event.date}</p>
-            <div className="h-[1px] w-4 bg-[#D4AF37]/50"></div>
-          </div>
+            <h3 className="font-cinzel text-3xl md:text-4xl text-[#8B1538] mb-4">{event.title}</h3>
 
-          <p className="font-cormorant text-[11px] md:text-sm mb-4 uppercase tracking-[0.3em] font-bold text-gray-500">{event.time}</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="flex items-start gap-3">
+                <div className="mt-1 w-1 h-8 bg-[#D4AF37]"></div>
+                <div>
+                  <p className="font-cormorant text-xs uppercase tracking-widest text-gray-400 font-bold mb-1">Time</p>
+                  <p className="font-cormorant text-xl text-gray-800 font-semibold">{event.time}</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="mt-1 w-1 h-8 bg-[#D4AF37]"></div>
+                <div>
+                  <p className="font-cormorant text-xs uppercase tracking-widest text-gray-400 font-bold mb-1">Venue</p>
+                  <p className="font-cormorant text-xl text-gray-800 font-semibold leading-tight">{event.venue}</p>
+                  <p className="text-xs text-gray-500 mt-1 italic">{event.address}</p>
+                </div>
+              </div>
+            </div>
 
-          <div className="h-px w-24 md:w-32 bg-gradient-to-r from-transparent via-[#D4AF37]/40 to-transparent mx-auto mb-6"></div>
+            <p className="font-cormorant text-lg text-gray-600 italic leading-relaxed mb-6 border-l-2 border-[#D4AF37]/20 pl-4">
+              "{event.description}"
+            </p>
 
-          <p className="font-cormorant text-base md:text-lg italic mb-1 text-gray-400">at</p>
-          <p className="font-cormorant font-bold text-gray-800 text-lg md:text-2xl mb-1 leading-snug px-2">{event.venue}</p>
-          <p className="font-cormorant text-[10px] md:text-xs text-gray-400 mb-6 uppercase tracking-[0.2em]">{event.address}</p>
-
-          <p className="font-cormorant text-base md:text-xl text-gray-700 leading-relaxed px-2 md:px-8 italic font-light">
-            {event.description}
-          </p>
-
-          <div className="mt-8 pt-6 border-t border-gray-100 w-full">
-            <p className="font-cormorant text-[10px] uppercase tracking-[0.4em] text-gray-400 font-bold mb-2">Attire Recommendation</p>
-            <p className="font-cinzel text-xs md:text-base text-[#8B1538] font-bold tracking-wider">{event.dressCode}</p>
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#8B1538]"></span>
+              <p className="font-cinzel text-xs text-[#8B1538] font-bold tracking-wider">
+                Dress Code: <span className="text-gray-600 font-normal normal-case font-cormorant text-lg ml-2">{event.dressCode}</span>
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-
-      {/* Animated dots for timeline */}
-      <div className="hidden md:block absolute left-[-60px] top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#D4AF37] shadow-[0_0_15px_#D4AF37] twinkle"></div>
+      </motion.div>
     </motion.div>
   );
 };

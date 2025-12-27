@@ -16,19 +16,19 @@ export const RoyalPortrait: React.FC = () => {
       {/* The Main Royal Frame */}
       <div className="relative aspect-[3/4] rounded-[80px_80px_30px_30px] md:rounded-[120px_120px_40px_40px] overflow-hidden border-[6px] md:border-[10px] border-[#D4AF37] shadow-[0_20px_60px_-10px_rgba(0,0,0,0.6)] bg-[#FFF8E7] flex items-center justify-center">
         <div className="relative w-full h-full">
-          <motion.img 
+          <motion.img
             initial={{ opacity: 0, scale: 1.05 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
-            src={imageUrl} 
-            alt="Nizma and Rafsal Wedding Portrait" 
+            src={imageUrl}
+            alt="Nizma and Rafsal Rahim Wedding Portrait"
             className="w-full h-full object-cover"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.src = 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=1000&auto=format&fit=crop';
             }}
           />
-          
+
           {/* 
             Subtle gradient overlay to ground the image. 
             The UI text overlay is removed because the provided image already 
@@ -36,11 +36,11 @@ export const RoyalPortrait: React.FC = () => {
           */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
         </div>
-        
+
         {/* Elegant shimmer effect to add a touch of luxury to the portrait */}
         <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-white/10 via-transparent to-white/5"></div>
       </div>
-      
+
       {/* Decorative Label Frame Underneath */}
       <div className="absolute -bottom-6 md:-bottom-8 left-1/2 -translate-x-1/2 z-20">
         <div className="relative bg-[#8B1538] border-2 border-[#D4AF37] px-8 md:px-12 py-2 md:py-3 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.3)] min-w-[220px] md:min-w-[280px]">
