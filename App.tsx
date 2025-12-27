@@ -57,13 +57,6 @@ const BouquetDecoration = ({ className = "", opacity = 0.4 }) => (
 
 const App: React.FC = () => {
   const [isOpened, setIsOpened] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
 
   return (
     <div className="min-h-screen font-cormorant text-gray-800 selection:bg-[#D4AF37] selection:text-white overflow-x-hidden">

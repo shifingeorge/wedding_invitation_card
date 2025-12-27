@@ -1,13 +1,11 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 
 export const RoyalPortrait: React.FC = () => {
   /**
-   * We are now using the static image provided by the user.
-   * Assuming the uploaded image is named 'portrait.png' and placed in the project root.
+   * Use the image from the public folder so Vite serves it at '/portrait.png'
    */
-  const imageUrl = './portrait.png';
+  const imageUrl = '/portrait.png';
 
   return (
     <div className="relative w-full max-w-sm md:max-w-lg mx-auto p-2 md:p-4">
@@ -26,7 +24,6 @@ export const RoyalPortrait: React.FC = () => {
             alt="Nizma and Rafsal Wedding Portrait" 
             className="w-full h-full object-cover"
             onError={(e) => {
-              // Fallback to a high-quality thematic placeholder if portrait.png is not found
               const target = e.target as HTMLImageElement;
               target.src = 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=1000&auto=format&fit=crop';
             }}
