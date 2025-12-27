@@ -1,0 +1,7 @@
+{
+  "name": "Ethereal Union - Muslim Wedding Invitation",
+  "description": "A luxurious, interactive digital wedding invitation featuring 3D opening animations, Islamic geometric patterns, and elegant typography for a traditional Muslim wedding celebration.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
