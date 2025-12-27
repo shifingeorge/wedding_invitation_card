@@ -41,9 +41,9 @@ export const WEDDING_EVENTS: WeddingEvent[] = [
     title: 'The Sacred Wedding',
     date: 'Sunday, February 8, 2026',
     time: '12:00 PM (Noon)',
-    venue: 'The Grand Mosque & Palace Hall',
-    address: '123 Islamic Center Way, ST 12345',
-    description: 'Witness the sacred union of Nizma and Rafsal as they embark on their beautiful journey together.',
+    venue: 'KMJ CONVENTION CENTER',
+    address: 'KUZHIVELIPPADY, ERNAKULAM',
+    description: 'Witness the sacred union of Nizma and Rafsal Rahim as they embark on their beautiful journey together.',
     dressCode: 'Royal Formal Traditional',
     colorTheme: '#8B1538',
     icon: '💍',
@@ -52,5 +52,5 @@ export const WEDDING_EVENTS: WeddingEvent[] = [
 
 export const BISMILLAH = 'بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ';
 export const BRIDE_NAME = "NIZMA PARVIN";
-export const GROOM_NAME = "RAFSAL";
+export const GROOM_NAME = "RAFSAL RAHIM";
 export const HASHTAG = ""; // Removed hashtag as requested

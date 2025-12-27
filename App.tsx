@@ -78,6 +78,22 @@ const BouquetDecoration = ({ className = "", opacity = 0.4 }) => {
   );
 };
 
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.5
+    }
+  }
+};
+
 const App: React.FC = () => {
   const [isOpened, setIsOpened] = useState(false);
 
@@ -115,36 +131,37 @@ const App: React.FC = () => {
 
           <MehrabFrame className="w-full max-w-2xl relative z-10">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 1 }}
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
               className="flex flex-col items-center"
             >
-              <p className="font-amiri text-[#8B1538] text-xl md:text-2xl mb-6 md:mb-8 gold-shimmer leading-relaxed">{BISMILLAH}</p>
+              <motion.p variants={fadeInUp} className="font-amiri text-[#8B1538] text-xl md:text-2xl mb-6 md:mb-8 gold-shimmer leading-relaxed">{BISMILLAH}</motion.p>
 
-              <p className="uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-xs text-gray-500 mb-6 md:mb-8 font-cinzel">
+              <motion.p variants={fadeInUp} className="uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-xs text-gray-500 mb-6 md:mb-8 font-cinzel">
                 Together with their families
-              </p>
+              </motion.p>
 
-              <div className="relative mb-4">
+              <motion.div variants={fadeInUp} className="relative mb-4">
                 <h1 className="font-cinzel text-3xl md:text-5xl lg:text-7xl text-[#8B1538] drop-shadow-xl text-center leading-[1.2] md:leading-tight">
                   {BRIDE_NAME}
                 </h1>
-              </div>
+              </motion.div>
 
-              <div className="font-vibes text-4xl md:text-5xl text-[#D4AF37] my-3 md:my-4">&</div>
+              <motion.div variants={fadeInUp} className="font-vibes text-4xl md:text-5xl text-[#D4AF37] my-3 md:my-4">&</motion.div>
 
-              <div className="relative mb-8 md:mb-12">
+              <motion.div variants={fadeInUp} className="relative mb-8 md:mb-12">
                 <h1 className="font-cinzel text-3xl md:text-5xl lg:text-7xl text-[#8B1538] drop-shadow-xl text-center leading-[1.2] md:leading-tight">
                   {GROOM_NAME}
                 </h1>
-              </div>
+              </motion.div>
 
-              <p className="italic text-base md:text-xl text-gray-700 max-w-md mb-8 md:mb-10 leading-relaxed text-center font-cormorant px-4">
+              <motion.p variants={fadeInUp} className="italic text-base md:text-xl text-gray-700 max-w-md mb-8 md:mb-10 leading-relaxed text-center font-cormorant px-4">
                 cordially invite you to join the occasion of their joyous commitment on
-              </p>
+              </motion.p>
 
-              <div className="flex items-center gap-2 md:gap-8 mb-8 md:mb-10 scale-[0.85] md:scale-110 origin-center">
+              <motion.div variants={fadeInUp} className="flex items-center gap-2 md:gap-8 mb-8 md:mb-10 scale-[0.85] md:scale-110 origin-center">
                 <div className="text-right">
                   <p className="font-cinzel text-base md:text-lg font-bold text-gray-600">SUNDAY</p>
                 </div>
@@ -156,7 +173,7 @@ const App: React.FC = () => {
                 <div className="text-left">
                   <p className="font-cinzel text-base md:text-lg font-bold text-gray-600">AT NOON</p>
                 </div>
-              </div>
+              </motion.div>
 
               <div className="flex items-center gap-3 w-full justify-center mb-6 md:mb-8">
                 <div className="h-px w-12 md:w-16 bg-gradient-to-r from-transparent to-[#D4AF37]"></div>
@@ -164,21 +181,27 @@ const App: React.FC = () => {
                 <div className="h-px w-12 md:w-16 bg-gradient-to-l from-transparent to-[#D4AF37]"></div>
               </div>
 
-              <p className="italic text-[10px] md:text-sm text-gray-400 mb-2 uppercase tracking-[0.2em] font-cinzel">The Venue</p>
-              <p className="font-bold text-lg md:text-xl mb-10 md:mb-12 max-w-sm text-center text-[#8B1538] tracking-tight uppercase leading-snug px-2">
-                THE GRAND MOSQUE CENTRAL<br />& PALACE HALL
-              </p>
+              <motion.div variants={fadeInUp}>
+                <p className="italic text-[10px] md:text-sm text-gray-400 mb-2 uppercase tracking-[0.2em] font-cinzel">The Venue</p>
+                <p className="font-bold text-lg md:text-xl mb-10 md:mb-12 max-w-sm text-center text-[#8B1538] tracking-tight uppercase leading-snug px-2">
+                  KMJ CONVENTION CENTER<br />KUZHIVELIPPADY, ERNAKULAM
+                </p>
+              </motion.div>
 
-              <div className="p-3 md:p-4 bg-white/40 border border-[#D4AF37]/30 rounded-full px-8 md:px-12">
+              <motion.div
+                variants={fadeInUp}
+                whileHover={{ scale: 1.05 }}
+                className="p-3 md:p-4 bg-white/40 border border-[#D4AF37]/30 rounded-full px-8 md:px-12 cursor-pointer shadow-sm hover:shadow-md transition-shadow"
+              >
                 <p className="font-cormorant italic text-sm text-[#8B1538] text-center tracking-[0.2em] font-bold">
                   Save the Date
                 </p>
-              </div>
+              </motion.div>
             </motion.div>
           </MehrabFrame>
         </section>
 
-        <FloralDivider />
+
 
         {/* Section 2: Blessings */}
         <section className="py-20 md:py-24 bg-[#FFF8E7] text-center px-4 relative overflow-hidden">
@@ -235,7 +258,7 @@ const App: React.FC = () => {
             >
               <div className="p-6 md:p-8 bg-white/50 rounded-2xl md:rounded-3xl border border-[#D4AF37]/10 shadow-inner">
                 <p className="text-lg md:text-2xl italic text-gray-700 leading-relaxed font-cormorant">
-                  From different paths to a shared horizon, Nizma and Rafsal invite you to witness the beginning of their forever.
+                  From different paths to a shared horizon, Nizma and Rafsal Rahim invite you to witness the beginning of their forever.
                   A journey of love, faith, and barakah.
                 </p>
               </div>
@@ -320,7 +343,7 @@ const App: React.FC = () => {
                 <div className="h-px w-16 md:w-24 bg-gradient-to-l from-transparent to-[#D4AF37]"></div>
               </div>
               <p className="font-cinzel text-[10px] md:text-sm uppercase tracking-[0.4em] opacity-40 mt-6">With Eternal Love & Gratitude</p>
-              <p className="font-cinzel text-base md:text-lg tracking-[0.1em] text-[#FFF8E7]/60 uppercase">The Families of<br />Nizma & Rafsal</p>
+              <p className="font-cinzel text-base md:text-lg tracking-[0.1em] text-[#FFF8E7]/60 uppercase">The Families of Nizma & Rafsal</p>
             </div>
           </div>
         </footer>
