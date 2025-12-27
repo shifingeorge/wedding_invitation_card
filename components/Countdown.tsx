@@ -12,7 +12,7 @@ export const Countdown: React.FC = () => {
   useEffect(() => {
     // Updated wedding date to Feb 8, 2026
     const weddingDate = new Date('February 8, 2026 12:00:00').getTime();
-    
+
     const timer = setInterval(() => {
       const now = new Date().getTime();
       const distance = weddingDate - now;
@@ -34,7 +34,7 @@ export const Countdown: React.FC = () => {
         <span className="font-cinzel text-2xl md:text-3xl font-bold">{value < 0 ? 0 : value}</span>
       </div>
       {/* Changed label text color to ivory for better readability */}
-      <span className="font-cormorant text-[10px] md:text-xs uppercase tracking-widest text-[#FFF8E7] font-bold">{label}</span>
+      <span className="font-cormorant text-[10px] md:text-xs uppercase tracking-widest text-[#8B1538] font-bold">{label}</span>
     </div>
   );
 

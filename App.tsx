@@ -14,7 +14,7 @@ const AtmosphereEffect = () => {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-[60]">
       {particles.map((_, i) => (
-        <div 
+        <div
           key={i}
           className="floating-particle"
           style={{
@@ -35,25 +35,48 @@ const AtmosphereEffect = () => {
 };
 
 const BackgroundPatternLayer = () => (
-  <motion.div 
+  <motion.div
     animate={{ rotate: 360 }}
     transition={{ duration: 240, repeat: Infinity, ease: "linear" }}
     className="fixed top-[-50%] left-[-50%] w-[200%] h-[200%] islamic-pattern opacity-10 pointer-events-none z-0"
   />
 );
 
-const BouquetDecoration = ({ className = "", opacity = 0.4 }) => (
-  <div className={`pointer-events-none ${className}`}>
-    <svg width="150" height="150" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ opacity }} className="filter drop-shadow-2xl animate-sway">
-      <path d="M60 100C60 100 40 80 40 60C40 40 60 20 60 20C60 20 80 40 80 60C80 80 60 100 60 100Z" fill="#8B1538" stroke="#D4AF37" strokeWidth="2"/>
-      <circle cx="45" cy="50" r="15" fill="#D4AF37" fillOpacity="0.2" stroke="#D4AF37"/>
-      <circle cx="75" cy="50" r="15" fill="#D4AF37" fillOpacity="0.2" stroke="#D4AF37"/>
-      <path d="M50 80C50 80 30 70 30 50M70 80C70 80 90 70 90 50" stroke="#D4AF37" strokeWidth="1"/>
-      <path d="M60 110V90" stroke="#D4AF37" strokeWidth="2"/>
-      <path d="M40 90 Q 60 110 80 90" stroke="#D4AF37" strokeWidth="1" fill="none" />
-    </svg>
-  </div>
-);
+const BouquetDecoration = ({ className = "", opacity = 0.4 }) => {
+  const petals = [0, 45, 90, 135, 180, 225, 270, 315];
+  return (
+    <div className={`pointer-events-none ${className}`}>
+      <motion.svg
+        width="150"
+        height="150"
+        viewBox="0 0 120 120"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{ opacity }}
+        animate={{ rotate: 360 }}
+        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+        className="filter drop-shadow-2xl"
+      >
+        {petals.map((angle) => (
+          <g key={angle} transform={`rotate(${angle} 60 60)`}>
+            {/*
+                 Scale down petal to fit radius and translate so 'bottom' tip is near center.
+                 Original path y-range: ~20 to 100. Center y: 60.
+                 We shift y by -25 to move bottom tip closer to center, then scale.
+             */}
+            <g transform="translate(0, -25) scale(0.55)" style={{ transformOrigin: '60px 60px' }}>
+              <path d="M60 100C60 100 40 80 40 60C40 40 60 20 60 20C60 20 80 40 80 60C80 80 60 100 60 100Z" fill="#8B1538" stroke="#D4AF37" strokeWidth="2" />
+              <path d="M60 90V30" stroke="#D4AF37" strokeWidth="1" opacity="0.5" />
+            </g>
+          </g>
+        ))}
+        {/* Central Core - Made clearer */}
+        <circle cx="60" cy="60" r="8" fill="#FFF8E7" stroke="#D4AF37" strokeWidth="1" />
+        <circle cx="60" cy="60" r="4" fill="#8B1538" />
+      </motion.svg>
+    </div>
+  );
+};
 
 const App: React.FC = () => {
   const [isOpened, setIsOpened] = useState(false);
@@ -73,7 +96,7 @@ const App: React.FC = () => {
       >
         <AtmosphereEffect />
         <BackgroundPatternLayer />
-        
+
         {/* Hero Decorative Lanterns - Optimized for mobile */}
         <div className="fixed top-0 left-2 md:left-8 z-10 opacity-60 pointer-events-none">
           <Lantern className="scale-75 md:scale-100" />
@@ -98,11 +121,11 @@ const App: React.FC = () => {
               className="flex flex-col items-center"
             >
               <p className="font-amiri text-[#8B1538] text-xl md:text-2xl mb-6 md:mb-8 gold-shimmer leading-relaxed">{BISMILLAH}</p>
-              
+
               <p className="uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-xs text-gray-500 mb-6 md:mb-8 font-cinzel">
                 Together with their families
               </p>
-              
+
               <div className="relative mb-4">
                 <h1 className="font-cinzel text-3xl md:text-5xl lg:text-7xl text-[#8B1538] drop-shadow-xl text-center leading-[1.2] md:leading-tight">
                   {BRIDE_NAME}
@@ -116,11 +139,11 @@ const App: React.FC = () => {
                   {GROOM_NAME}
                 </h1>
               </div>
-              
+
               <p className="italic text-base md:text-xl text-gray-700 max-w-md mb-8 md:mb-10 leading-relaxed text-center font-cormorant px-4">
                 cordially invite you to join the occasion of their joyous commitment on
               </p>
-              
+
               <div className="flex items-center gap-2 md:gap-8 mb-8 md:mb-10 scale-[0.85] md:scale-110 origin-center">
                 <div className="text-right">
                   <p className="font-cinzel text-base md:text-lg font-bold text-gray-600">SUNDAY</p>
@@ -134,18 +157,18 @@ const App: React.FC = () => {
                   <p className="font-cinzel text-base md:text-lg font-bold text-gray-600">AT NOON</p>
                 </div>
               </div>
-              
+
               <div className="flex items-center gap-3 w-full justify-center mb-6 md:mb-8">
                 <div className="h-px w-12 md:w-16 bg-gradient-to-r from-transparent to-[#D4AF37]"></div>
                 <div className="w-3 h-3 rotate-45 border border-[#D4AF37] twinkle"></div>
                 <div className="h-px w-12 md:w-16 bg-gradient-to-l from-transparent to-[#D4AF37]"></div>
               </div>
-              
+
               <p className="italic text-[10px] md:text-sm text-gray-400 mb-2 uppercase tracking-[0.2em] font-cinzel">The Venue</p>
               <p className="font-bold text-lg md:text-xl mb-10 md:mb-12 max-w-sm text-center text-[#8B1538] tracking-tight uppercase leading-snug px-2">
-                THE GRAND MOSQUE CENTRAL<br/>& PALACE HALL
+                THE GRAND MOSQUE CENTRAL<br />& PALACE HALL
               </p>
-              
+
               <div className="p-3 md:p-4 bg-white/40 border border-[#D4AF37]/30 rounded-full px-8 md:px-12">
                 <p className="font-cormorant italic text-sm text-[#8B1538] text-center tracking-[0.2em] font-bold">
                   Save the Date
@@ -161,7 +184,7 @@ const App: React.FC = () => {
         <section className="py-20 md:py-24 bg-[#FFF8E7] text-center px-4 relative overflow-hidden">
           <BouquetDecoration className="absolute -top-10 -right-10 opacity-30 scale-125 md:scale-150 rotate-180" />
           <BouquetDecoration className="absolute -bottom-10 -left-10 opacity-30 scale-125 md:scale-150" />
-          
+
           <div className="max-w-4xl mx-auto relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -186,7 +209,7 @@ const App: React.FC = () => {
           <BouquetDecoration className="absolute top-1/4 right-0 opacity-10 scale-150 md:scale-[2] rotate-180" />
 
           <div className="max-w-4xl w-full px-4 text-center">
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               className="font-cinzel text-2xl md:text-4xl text-[#8B1538] mb-4 tracking-tighter"
@@ -194,7 +217,7 @@ const App: React.FC = () => {
               The Union of Souls
             </motion.h2>
             <div className="w-20 md:w-32 h-px bg-[#D4AF37] mx-auto mb-10 md:mb-16"></div>
-            
+
             <div className="relative">
               <div className="absolute -top-10 -left-10 hidden lg:block scale-125 opacity-40">
                 <BouquetDecoration opacity={0.6} />
@@ -205,14 +228,14 @@ const App: React.FC = () => {
               <RoyalPortrait />
             </div>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               className="mt-16 md:mt-20 text-center max-w-2xl mx-auto px-4"
             >
               <div className="p-6 md:p-8 bg-white/50 rounded-2xl md:rounded-3xl border border-[#D4AF37]/10 shadow-inner">
                 <p className="text-lg md:text-2xl italic text-gray-700 leading-relaxed font-cormorant">
-                  From different paths to a shared horizon, Nizma and Rafsal invite you to witness the beginning of their forever. 
+                  From different paths to a shared horizon, Nizma and Rafsal invite you to witness the beginning of their forever.
                   A journey of love, faith, and barakah.
                 </p>
               </div>
@@ -220,20 +243,20 @@ const App: React.FC = () => {
           </div>
         </section>
 
-        <section className="py-8 md:py-12 bg-[#8B1538]">
+        <section className="bg-[#8B1538]">
           <FloralDivider />
         </section>
 
         {/* Section 4: Timeline */}
-        <section className="py-20 md:py-24 px-4 bg-[#8B1538] relative overflow-hidden">
+        <section className="py-20 md:py-24 px-4 bg-[#FFF8E7] relative overflow-hidden">
           <BouquetDecoration className="absolute top-0 left-[-80px] opacity-20 scale-[2] md:scale-[3]" />
           <BouquetDecoration className="absolute bottom-0 right-[-80px] opacity-20 scale-[2] md:scale-[3] rotate-180" />
-          
+
           <div className="max-w-4xl mx-auto relative z-10">
             <div className="flex flex-col items-center mb-16 md:mb-20">
-              <h2 className="font-cinzel text-3xl md:text-5xl text-[#FFF8E7] mb-6 tracking-wide text-center uppercase">The Celebration</h2>
+              <h2 className="font-cinzel text-3xl md:text-5xl text-[#8B1538] mb-6 tracking-wide text-center uppercase">The Celebration</h2>
               <div className="w-24 md:w-32 h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent"></div>
-              <p className="text-[#D4AF37] mt-4 tracking-[0.2em] md:tracking-[0.4em] font-cinzel uppercase text-[10px] md:text-xs font-bold">Timeline of Grace</p>
+              <p className="text-[#8B1538] mt-4 tracking-[0.2em] md:tracking-[0.4em] font-cinzel uppercase text-[10px] md:text-xs font-bold">Timeline of Grace</p>
             </div>
 
             <div className="relative">
@@ -242,7 +265,7 @@ const App: React.FC = () => {
                   <EventCard event={event} index={index} />
                   {index < WEDDING_EVENTS.length - 1 && (
                     <div className="flex justify-center my-6 md:hidden">
-                      <div className="w-px h-8 bg-[#D4AF37]/40"></div>
+                      <div className="w-px h-8 bg-[#D4AF37]"></div>
                     </div>
                   )}
                 </div>
@@ -251,27 +274,27 @@ const App: React.FC = () => {
           </div>
         </section>
 
-        <section className="py-8 md:py-12 bg-[#8B1538]">
+        <section className="bg-[#8B1538]">
           <FloralDivider />
         </section>
 
         {/* Section 5: Countdown Section */}
-        <section className="py-20 md:py-24 bg-[#8B1538] relative overflow-hidden">
+        <section className="py-20 md:py-24 bg-[#FFF8E7] relative overflow-hidden">
           <BouquetDecoration className="absolute top-0 left-0 opacity-10 scale-[2]" />
           <BouquetDecoration className="absolute bottom-0 right-0 opacity-10 scale-[2] rotate-180" />
-          
+
           <div className="max-w-3xl mx-auto px-4 relative z-10 text-center">
             <div className="flex flex-col items-center mb-12 md:mb-16">
-              <h2 className="font-cinzel text-2xl md:text-4xl text-[#FFF8E7] mb-8 uppercase tracking-[0.2em]">The Final Countdown</h2>
+              <h2 className="font-cinzel text-2xl md:text-4xl text-[#8B1538] mb-8 uppercase tracking-[0.2em]">The Final Countdown</h2>
               <div className="p-6 md:p-10 bg-white/5 rounded-[30px] md:rounded-[40px] border border-[#D4AF37]/30 backdrop-blur-md shadow-2xl w-full">
                 <Countdown />
               </div>
             </div>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="mt-10 md:mt-12 text-[#FFF8E7]/80 italic font-cormorant text-xl md:text-2xl px-4"
+              className="mt-10 md:mt-12 text-[#8B1538]/80 italic font-cormorant text-xl md:text-2xl px-4"
             >
               "We cannot wait to celebrate this special day with our loved ones."
             </motion.div>
@@ -282,7 +305,7 @@ const App: React.FC = () => {
         <footer className="py-24 md:py-32 bg-[#1a0505] text-[#D4AF37] text-center px-4 relative overflow-hidden">
           <BouquetDecoration className="absolute top-1/2 left-0 -translate-y-1/2 opacity-20 scale-[2] md:scale-[3]" />
           <BouquetDecoration className="absolute top-1/2 right-0 -translate-y-1/2 opacity-20 scale-[2] md:scale-[3] rotate-180" />
-          
+
           <div className="max-w-3xl mx-auto relative z-10">
             <p className="font-amiri text-2xl md:text-4xl mb-10 md:mb-12 leading-relaxed gold-shimmer">
               بَارَكَ اللهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ
@@ -292,12 +315,12 @@ const App: React.FC = () => {
             </p>
             <div className="flex flex-col items-center gap-6">
               <div className="flex items-center gap-4 md:gap-8">
-                 <div className="h-px w-16 md:w-24 bg-gradient-to-r from-transparent to-[#D4AF37]"></div>
-                 <div className="w-2 md:w-3 h-2 md:h-3 rotate-45 border border-[#D4AF37] twinkle"></div>
-                 <div className="h-px w-16 md:w-24 bg-gradient-to-l from-transparent to-[#D4AF37]"></div>
+                <div className="h-px w-16 md:w-24 bg-gradient-to-r from-transparent to-[#D4AF37]"></div>
+                <div className="w-2 md:w-3 h-2 md:h-3 rotate-45 border border-[#D4AF37] twinkle"></div>
+                <div className="h-px w-16 md:w-24 bg-gradient-to-l from-transparent to-[#D4AF37]"></div>
               </div>
               <p className="font-cinzel text-[10px] md:text-sm uppercase tracking-[0.4em] opacity-40 mt-6">With Eternal Love & Gratitude</p>
-              <p className="font-cinzel text-base md:text-lg tracking-[0.1em] text-[#FFF8E7]/60 uppercase">The Families of<br/>Nizma & Rafsal</p>
+              <p className="font-cinzel text-base md:text-lg tracking-[0.1em] text-[#FFF8E7]/60 uppercase">The Families of<br />Nizma & Rafsal</p>
             </div>
           </div>
         </footer>
