@@ -194,11 +194,11 @@ const App: React.FC = () => {
                 rel="noopener noreferrer"
                 variants={fadeInUp}
                 whileHover={{ scale: 1.05 }}
-                className="p-3 md:p-4 bg-white/40 border border-[#D4AF37]/30 rounded-full px-8 md:px-12 cursor-pointer shadow-sm hover:shadow-md transition-shadow inline-flex items-center gap-2"
+                className="p-3 md:p-4 bg-[#8B1538] border-2 border-[#D4AF37] rounded-full px-8 md:px-12 cursor-pointer shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 md:h-5 md:w-5 text-[#8B1538]"
+                  className="h-4 w-4 md:h-5 md:w-5 text-[#FFF8E7]"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -206,7 +206,7 @@ const App: React.FC = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                <p className="font-cormorant italic text-sm md:text-base text-[#8B1538] text-center tracking-[0.2em] font-bold">
+                <p className="shine-text font-cormorant italic text-sm md:text-base text-center tracking-[0.2em] font-bold">
                   View Location
                 </p>
               </motion.a>
