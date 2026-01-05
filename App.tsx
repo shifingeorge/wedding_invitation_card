@@ -171,7 +171,7 @@ const App: React.FC = () => {
                   <p className="font-cinzel text-xs text-gray-500 mt-1">2026</p>
                 </div>
                 <div className="text-left">
-                  <p className="font-cinzel text-base md:text-lg font-bold text-gray-600">AT NOON</p>
+                  <p className="font-cinzel text-base md:text-lg font-bold text-gray-600">11:00 AM</p>
                 </div>
               </motion.div>
 
