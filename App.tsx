@@ -188,15 +188,28 @@ const App: React.FC = () => {
                 </p>
               </motion.div>
 
-              <motion.div
+              <motion.a
+                href="https://www.google.com/maps/place/KMJ+Convention+Centre/@10.0496232,76.3704042,17z/data=!3m1!4b1!4m6!3m5!1s0x3b080bf1a2fde78f:0xbb8745bffc36d535!8m2!3d10.0496232!4d76.3729791!16s%2Fg%2F11b6d627v8?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D"
+                target="_blank"
+                rel="noopener noreferrer"
                 variants={fadeInUp}
                 whileHover={{ scale: 1.05 }}
-                className="p-3 md:p-4 bg-white/40 border border-[#D4AF37]/30 rounded-full px-8 md:px-12 cursor-pointer shadow-sm hover:shadow-md transition-shadow"
+                className="p-3 md:p-4 bg-white/40 border border-[#D4AF37]/30 rounded-full px-8 md:px-12 cursor-pointer shadow-sm hover:shadow-md transition-shadow inline-flex items-center gap-2"
               >
-                <p className="font-cormorant italic text-sm text-[#8B1538] text-center tracking-[0.2em] font-bold">
-                  Save the Date
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4 md:h-5 md:w-5 text-[#8B1538]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <p className="font-cormorant italic text-sm md:text-base text-[#8B1538] text-center tracking-[0.2em] font-bold">
+                  View Location
                 </p>
-              </motion.div>
+              </motion.a>
             </motion.div>
           </MehrabFrame>
         </section>
