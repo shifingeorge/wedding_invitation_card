@@ -11,7 +11,7 @@ export const Countdown: React.FC = () => {
 
   useEffect(() => {
     // Updated wedding date to Feb 8, 2026
-    const weddingDate = new Date('February 8, 2026 12:00:00').getTime();
+    const weddingDate = new Date('February 8, 2026 11:30:00').getTime();
 
     const timer = setInterval(() => {
       const now = new Date().getTime();

@@ -40,7 +40,7 @@ export const WEDDING_EVENTS: WeddingEvent[] = [
     id: 'wedding',
     title: 'The Sacred Wedding',
     date: 'Sunday, February 8, 2026',
-    time: '11:00 AM (Nikah)',
+    time: '11:30 AM (Nikah)',
     venue: 'KMJ CONVENTION CENTER',
     address: 'KUZHIVELIPPADY, ERNAKULAM',
     description: 'Witness the sacred union of Nizma and Rafsal Rahim as they embark on their beautiful journey together.',
