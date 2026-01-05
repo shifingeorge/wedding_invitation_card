@@ -56,28 +56,28 @@ export const Envelope: React.FC<EnvelopeProps> = ({ onOpen }) => {
         {/* Envelope Body */}
         <div className="relative w-full aspect-[4/3] bg-[#8B1538] rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.6)] border-4 border-[#D4AF37] overflow-hidden flex flex-col items-center justify-center px-6">
           <div className="absolute inset-0 islamic-pattern opacity-10"></div>
-          
+
           {/* Top Seal / Flap Detail */}
-          <div className="absolute top-0 w-full h-1/2 bg-[#6B0F1A] border-b-2 border-[#D4AF37]/50" 
-               style={{ clipPath: 'polygon(0 0, 100% 0, 50% 100%)' }}></div>
-          
+          <div className="absolute top-0 w-full h-1/2 bg-[#6B0F1A] border-b-2 border-[#D4AF37]/50"
+            style={{ clipPath: 'polygon(0 0, 100% 0, 50% 100%)' }}></div>
+
           <div className="relative z-10 flex flex-col items-center text-center mt-4">
             <div className="font-amiri text-[#D4AF37] text-lg md:text-xl mb-3 leading-tight">{BISMILLAH}</div>
             <div className="font-cinzel text-[#FFF8E7] text-xl md:text-3xl font-bold tracking-[0.15em] leading-snug">
-              {BRIDE_NAME}<br/><span className="text-[#D4AF37]">&</span><br/>{GROOM_NAME}
+              {BRIDE_NAME}<br /><span className="text-[#D4AF37]">&</span><br />{GROOM_NAME}
             </div>
             <div className="font-vibes text-[#D4AF37] text-xl md:text-2xl mt-4 opacity-90">
               You are invited to the Wedding
             </div>
           </div>
         </div>
-        
+
         {/* Tap Indicator */}
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 1, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="text-[#D4AF37] font-cormorant text-center mt-8 tracking-[0.3em] uppercase text-xs font-bold"
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="shine-text font-cormorant text-center mt-8 tracking-[0.3em] uppercase text-lg md:text-xl font-bold"
         >
           Tap to Open the Invitation
         </motion.p>
