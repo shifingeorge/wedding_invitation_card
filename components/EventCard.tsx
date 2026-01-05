@@ -70,12 +70,15 @@ export const EventCard: React.FC<EventCardProps> = ({ event, index }) => {
               "{event.description}"
             </p>
 
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#8B1538]"></span>
-              <p className="font-cinzel text-xs text-[#8B1538] font-bold tracking-wider">
-                Dress Code: <span className="text-gray-600 font-normal normal-case font-cormorant text-lg ml-2">{event.dressCode}</span>
-              </p>
-            </div>
+
+            {event.dressCode && (
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#8B1538]"></span>
+                <p className="font-cinzel text-xs text-[#8B1538] font-bold tracking-wider">
+                  Dress Code: <span className="text-gray-600 font-normal normal-case font-cormorant text-lg ml-2">{event.dressCode}</span>
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </motion.div>
