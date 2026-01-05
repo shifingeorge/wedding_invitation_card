@@ -38,9 +38,6 @@ export const EventCard: React.FC<EventCardProps> = ({ event, index }) => {
             <p className="font-cinzel text-lg tracking-widest mb-2 opacity-80">{dayName}</p>
             <p className="font-cinzel text-6xl font-black leading-none mb-2">{dateNum}</p>
             <p className="font-cinzel text-2xl tracking-[0.3em] font-bold">{monthName}</p>
-            <div className="mt-4 w-12 h-12 rounded-full border border-[#D4AF37]/50 flex items-center justify-center">
-              <span className="text-2xl pt-1">{event.icon}</span>
-            </div>
           </div>
 
           {/* Content Column - Right */}
@@ -64,7 +61,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event, index }) => {
                 <div>
                   <p className="font-cormorant text-xs uppercase tracking-widest text-gray-400 font-bold mb-1">Venue</p>
                   <p className="font-cormorant text-xl text-gray-800 font-semibold leading-tight">{event.venue}</p>
-                  <p className="text-xs text-gray-500 mt-1 italic">{event.address}</p>
+                  {event.address && <p className="text-xs text-gray-500 mt-1 italic">{event.address}</p>}
                 </div>
               </div>
             </div>
