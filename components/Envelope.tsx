@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { motion } from 'framer-motion';
+import React, { useMemo, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { BISMILLAH, BRIDE_NAME, GROOM_NAME } from '../constants';
 
 interface EnvelopeProps {
@@ -7,6 +7,53 @@ interface EnvelopeProps {
 }
 
 export const Envelope: React.FC<EnvelopeProps> = ({ onOpen }) => {
+  // Audio reference for the wedding song
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  // Track audio loading state
+  const [isAudioLoading, setIsAudioLoading] = useState(true);
+
+  // Handle envelope click - play audio and open
+  const handleEnvelopeClick = () => {
+    console.log('Envelope clicked!');
+
+    // Play the audio
+    if (audioRef.current) {
+      console.log('Attempting to play audio...');
+      console.log('Audio element state:', {
+        paused: audioRef.current.paused,
+        currentTime: audioRef.current.currentTime,
+        duration: audioRef.current.duration,
+        readyState: audioRef.current.readyState,
+        networkState: audioRef.current.networkState
+      });
+
+      // Reset to beginning and set volume
+      audioRef.current.currentTime = 0;
+      audioRef.current.volume = 0.5; // Set to 50% volume
+
+      // Attempt to play
+      const playPromise = audioRef.current.play();
+
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            console.log('Audio playing successfully!');
+          })
+          .catch((error) => {
+            console.error('Error playing audio:', error);
+            console.error('Error name:', error.name);
+            console.error('Error message:', error.message);
+          });
+      }
+    } else {
+      console.error('Audio ref is null');
+    }
+
+    // Call the onOpen callback
+    onOpen?.();
+  };
+
   // compute viewport safely (fallbacks for SSR)
   const vw = typeof window !== 'undefined' ? window.innerWidth : 1024;
   const vh = typeof window !== 'undefined' ? window.innerHeight : 768;
@@ -24,6 +71,67 @@ export const Envelope: React.FC<EnvelopeProps> = ({ onOpen }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#1a0505] overflow-hidden p-4">
+      {/* Hidden audio element */}
+      <audio
+        ref={audioRef}
+        src="/song.mp3"
+        loop
+        preload="auto"
+        onLoadedMetadata={() => {
+          console.log('Audio metadata loaded');
+        }}
+        onCanPlayThrough={() => {
+          console.log('Audio can play through');
+          setIsAudioLoading(false);
+        }}
+        onError={(e) => {
+          console.error('Audio element error:', e);
+          setIsAudioLoading(false); // Hide loading on error too
+        }}
+        style={{ display: 'none' }}
+      />
+
+      {/* Loading Indicator */}
+      <AnimatePresence>
+        {isAudioLoading && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="absolute inset-0 z-[100] flex items-center justify-center bg-[#1a0505]/95 backdrop-blur-sm"
+          >
+            <div className="flex flex-col items-center gap-6">
+              {/* Spinning Ring */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                className="relative w-16 h-16"
+              >
+                <div className="absolute inset-0 border-4 border-[#D4AF37]/20 rounded-full"></div>
+                <div className="absolute inset-0 border-4 border-transparent border-t-[#D4AF37] rounded-full"></div>
+              </motion.div>
+
+              {/* Loading Text */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-center"
+              >
+                <p className="font-cinzel text-[#D4AF37] text-lg tracking-[0.3em] uppercase mb-2">
+                  Loading
+                </p>
+                <p className="font-cormorant text-[#FFF8E7]/60 text-sm italic">
+                  Preparing your invitation...
+                </p>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+
       {/* Floating particles background */}
       <div className="absolute inset-0 pointer-events-none">
         {particles.map((p, i) => (
@@ -51,7 +159,7 @@ export const Envelope: React.FC<EnvelopeProps> = ({ onOpen }) => {
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1, ease: 'easeOut' }}
         className="relative cursor-pointer group w-full max-w-[450px]"
-        onClick={() => onOpen?.()}
+        onClick={handleEnvelopeClick}
       >
         {/* Envelope Body */}
         <div className="relative w-full aspect-[4/3] bg-[#8B1538] rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.6)] border-4 border-[#D4AF37] overflow-hidden flex flex-col items-center justify-between px-6 py-6">
