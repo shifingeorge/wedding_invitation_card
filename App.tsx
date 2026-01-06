@@ -158,7 +158,7 @@ const App: React.FC = () => {
               </motion.div>
 
               <motion.p variants={fadeInUp} className="italic text-base md:text-xl text-gray-700 max-w-md mb-8 md:mb-10 leading-relaxed text-center font-cormorant px-4">
-                cordially invite you to join the occasion of their joyous commitment on
+                Cordially invite you to join the occasion of their joyous commitment on
               </motion.p>
 
               <motion.div variants={fadeInUp} className="flex items-center gap-2 md:gap-8 mb-8 md:mb-10 scale-[0.85] md:scale-110 origin-center">
@@ -171,7 +171,7 @@ const App: React.FC = () => {
                   <p className="font-cinzel text-xs text-gray-500 mt-1">2026</p>
                 </div>
                 <div className="text-left">
-                  <p className="font-cinzel text-base md:text-lg font-bold text-gray-600">11:00 AM</p>
+                  <p className="font-cinzel text-base md:text-lg font-bold text-gray-600">11:30 AM</p>
                 </div>
               </motion.div>
 
