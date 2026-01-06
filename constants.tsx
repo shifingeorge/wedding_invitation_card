@@ -31,7 +31,7 @@ export const WEDDING_EVENTS: WeddingEvent[] = [
     time: '7:00 PM onwards',
     venue: 'KMJ CONVENTION CENTER',
     address: 'KUZHIVELIPPADY, ERNAKULAM',
-    description: 'An enchanting night of henna artistry, dance performances, and melodic celebrations.',
+    description: 'Join an enchanting night of henna, dance, and music.',
     dressCode: '',
     colorTheme: '#2C5F2D',
     icon: '🎨',
