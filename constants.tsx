@@ -19,7 +19,7 @@ export const WEDDING_EVENTS: WeddingEvent[] = [
     time: '5:30 PM onwards',
     venue: 'Home',
     address: '',
-    description: 'Join us for a vibrant evening of Haldi ceremony and traditional festivities.',
+    description: 'Join us for a vibrant evening of Haldi ceremony.',
     dressCode: 'Yellow and Orange',
     colorTheme: '#FFD700',
     icon: '🌼',
